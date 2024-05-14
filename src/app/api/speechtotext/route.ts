@@ -6,15 +6,18 @@ export async function POST(req: Request) {
   const formData = await req.formData();
   const file = formData.get("file") as File;
   const lang = formData.get("lang") as string;
-  let token = formData.get("token") as string;
+  let token = formData.get("token") as string | null;
 
   if (token === "null") {
     token = null;
   }
 
   if (!token && !process.env.OPENAI_API_KEY) {
-    return Response.json({
+    return new Response(JSON.stringify({
       error: "No API key provided.",
+    }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
     });
   }
 
@@ -28,5 +31,7 @@ export async function POST(req: Request) {
     language: lang || undefined,
   });
 
-  return Response.json(transcription);
+  return new Response(JSON.stringify(transcription), {
+    headers: { "Content-Type": "application/json" },
+  });
 }
