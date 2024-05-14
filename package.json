@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^1.2.2",
     "@wmik/use-media-recorder": "^1.6.5-beta.0",
     "ai": "^2.2.28",
     "merge-images": "^2.0.0",
