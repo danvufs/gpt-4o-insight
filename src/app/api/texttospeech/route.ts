@@ -6,7 +6,11 @@ export async function POST(req: Request) {
   const formData = await req.formData();
   const input = formData.get("input") as string;
   const tokenValue = formData.get("token");
-  const token = tokenValue === "null" ? null : (tokenValue as string);
+  let token: string | undefined;
+
+  if (tokenValue !== "null") {
+    token = tokenValue as string;
+  }
 
   if (!token && !process.env.OPENAI_API_KEY) {
     return new Response(JSON.stringify({ error: "No API key provided." }), {
