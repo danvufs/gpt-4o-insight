@@ -1,5 +1,5 @@
+import Head from 'next/head';
 import Chat from "./chat";
-import Head from "next/head";
 
 export const metadata = {
   title: "GPT-4o Insight",
@@ -18,3 +18,4 @@ export default function Page() {
     </>
   );
 }
+
