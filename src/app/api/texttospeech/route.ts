@@ -5,15 +5,16 @@ export const runtime = "edge";
 export async function POST(req: Request) {
   const formData = await req.formData();
   const input = formData.get("input") as string;
-  let token = formData.get("token") as string;
+  let token = formData.get("token") as string | null;
 
   if (token === "null") {
     token = null;
   }
 
   if (!token && !process.env.OPENAI_API_KEY) {
-    return Response.json({
-      error: "No API key provided.",
+    return new Response(JSON.stringify({ error: "No API key provided." }), {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
     });
   }
 
