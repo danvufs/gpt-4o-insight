@@ -1,4 +1,5 @@
 import Chat from "./chat";
+import Head from "next/head";
 
 export const metadata = {
   title: "GPT-4o Insight",
@@ -6,5 +7,14 @@ export const metadata = {
 };
 
 export default function Page() {
-  return <Chat />;
+  return (
+    <>
+      <Head>
+        <title>{metadata.title}</title>
+        <meta name="description" content={metadata.description} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <Chat />
+    </>
+  );
 }
